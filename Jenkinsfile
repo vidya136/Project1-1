@@ -1,12 +1,15 @@
-"""
-Calculator library containing basic math operations.
-"""
-
-
-def add(first_term, second_term):
-    return first_term + second_term
-
-
-def subtract(first_term, second_term):
-    return first_term - second_term
-
+pipeline {
+  agent { docker { image 'python:3.7.2' } }
+  stages {
+    stage('build') {
+      steps {
+        sh 'pip install -r requirements.txt'
+      }
+    }
+    stage('test') {
+      steps {
+        sh 'python test.py'
+      }
+    }
+  }
+}
