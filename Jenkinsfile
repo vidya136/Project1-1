@@ -1,19 +1,15 @@
 pipeline {
-  agent {
-    label 'docker'
-  }
+  agent { docker { image 'python:3.7.2' } }
   stages {
     stage('build') {
-        agent { docker { image 'python:3.7.2' } }
-         steps {
-            bat 'pip install -r requirements.txt'
-               }
+      steps {
+        bat 'pip install -r requirements.txt'
+      }
     }
     stage('test') {
-        agent { docker { image 'python:3.7.2' } }
-        steps {
+      steps {
         bat 'python test.py'
-              }
+      }
     }
   }
 }
